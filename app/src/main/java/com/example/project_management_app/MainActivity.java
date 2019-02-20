@@ -16,6 +16,8 @@ import android.view.MenuItem;
 public class git MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    // test git merging using comment on line 19
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
