@@ -1,6 +1,5 @@
 package com.example.project_management_app;
 
-import java.util.Vector;
 
 public class Tasks {
 

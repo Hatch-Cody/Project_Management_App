@@ -6,7 +6,7 @@ import java.util.Vector;
 public class Profile {
     private String name;
     private String userName;
-    private String pasword;
+    private String password;
     private Boolean isActive;
     private Boolean isManager;
     private String EmployeeId;
@@ -27,12 +27,12 @@ public class Profile {
         this.name = name;
     }
 
-    public String comparePasword() {
-        return pasword;
+    public String comparePassword() {
+        return password;
     }
 
-    public void setPasword(String pasword) {
-        this.pasword = pasword;
+    public void setPassword(String pasword) {
+        this.password = pasword;
     }
 
     public Boolean isManager() {
