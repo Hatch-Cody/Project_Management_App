@@ -3,8 +3,12 @@ package com.example.project_management_app;
 public class TaskItems {
     private String TaskName;
     private int priority;
-    private String bio;
+    private Boolean isComplete;
+    private int progress;
+    private String description;
     private String comment;
+    private String dueDate;
+    private String assignDate;
     private String taskId;
 
     public String getTaskName() {
@@ -23,12 +27,12 @@ public class TaskItems {
         this.priority = priority;
     }
 
-    public String getBio() {
-        return bio;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getComment() {
@@ -45,5 +49,37 @@ public class TaskItems {
 
     public void setTaskId(String taskId) {
         this.taskId = taskId;
+    }
+
+    public Boolean getComplete() {
+        return isComplete;
+    }
+
+    public void setComplete(Boolean complete) {
+        isComplete = complete;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public String getAssignDate() {
+        return assignDate;
+    }
+
+    public void setAssignDate(String assignDate) {
+        this.assignDate = assignDate;
     }
 }
