@@ -1,5 +1,7 @@
 package com.example.project_management_app;
 
+import android.view.View;
+
 import java.util.Queue;
 import java.util.Vector;
 
@@ -129,5 +131,13 @@ public class Profile {
 
     public void setTasks(Vector<Tasks> t) {
         this.t = t;
+    }
+
+    public void makeNewTask(View v){
+
+    }
+
+    public void sendTask(View v){
+
     }
 }
