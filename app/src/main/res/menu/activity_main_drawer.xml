@@ -5,33 +5,42 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_task_list"
+            android:icon="@drawable/ic_list"
+            android:title="Task List" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_new_task"
+            android:icon="@drawable/ic_new_task"
+            android:title="New Task" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_groups"
+            android:icon="@drawable/ic_group"
+            android:title="Groups" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_add_group"
+            android:icon="@drawable/ic_group_add"
+            android:title="Add group" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="------------------------------------------">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_messages"
+                android:icon="@drawable/ic_messages"
+                android:title="Messages" />
+        </menu>
+    </item>
+
+    <item android:title="------------------------------------------">
+        <menu>
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Logout" />
         </menu>
     </item>
 
