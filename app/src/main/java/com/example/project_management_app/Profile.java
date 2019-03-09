@@ -21,6 +21,12 @@ public class Profile {
     private double userId;
     private Vector<Tasks> t;
 
+    //constructor for testing some stuff...
+    Profile() {
+        userName = "User Name";
+        email = "User Email";
+    }
+
     public String getName() {
         return name;
     }

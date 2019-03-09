@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,6 +44,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //TEST PROFILE//////////////////////////////////////////////////////////////////////////////
+        Profile testP = new Profile();
+        String temp = testP.getUserName();
+        TextView tvTemp = (TextView) findViewById(R.id.email_drawer_header);
+        tvTemp.setText(temp);
     }
 
     @Override
@@ -82,17 +90,19 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_task_list) {
+            // Handle the actions for selected menu items
+        } else if (id == R.id.nav_new_task) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_groups) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_add_group) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_messages) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_settings) {
+
+        } else if (id == R.id.nav_logout) {
 
         }
 
