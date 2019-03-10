@@ -1,6 +1,7 @@
 package com.example.project_management_app;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
@@ -45,11 +47,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //TEST PROFILE//////////////////////////////////////////////////////////////////////////////
-        Profile testP = new Profile();
-        String temp = testP.getUserName();
-        TextView tvTemp = (TextView) findViewById(R.id.email_drawer_header);
-        tvTemp.setText(temp);
     }
 
     @Override
@@ -66,6 +63,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        final Handler handler = new Handler();
+        Profile testP = new Profile();///////////////////////////////Will be passed proper profile on login
+
+        TextView email_drawer_header = (TextView) findViewById(R.id.email_drawer_header);
+        TextView userName_drawer_header = (TextView) findViewById(R.id.userName_drawer_header);
+        ImageView profile_pic_header; ////////////////////////////Will pass profile pic when set up
+
+        BackgroundMenuThread menuSet = new BackgroundMenuThread(email_drawer_header, userName_drawer_header, handler, MainActivity.this, testP);
+        menuSet.run();
         return true;
     }
 

@@ -22,7 +22,7 @@
             android:title="Add group" />
     </group>
 
-    <item android:title="------------------------------------------">
+    <item android:title="">
         <menu>
             <item
                 android:id="@+id/nav_messages"
@@ -31,7 +31,7 @@
         </menu>
     </item>
 
-    <item android:title="------------------------------------------">
+    <item android:title="">
         <menu>
             <item
                 android:id="@+id/nav_settings"
