@@ -19,8 +19,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    // test git merging using comment on line 19
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +120,3 @@ public class MainActivity extends AppCompatActivity
 
     }
 }
-
-
-//Tanner Left an edit to test push capability. Huzzah.
