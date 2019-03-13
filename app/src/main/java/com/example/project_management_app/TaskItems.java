@@ -11,75 +11,58 @@ public class TaskItems {
     private String assignDate;
     private String taskId;
 
-    public String getTaskName() {
+    public String  getTaskName() {
         return TaskName;
     }
-
-    public void setTaskName(String taskName) {
+    public void    setTaskName(String taskName) {
         TaskName = taskName;
     }
-
-    public int getPriority() {
+    public int     getPriority() {
         return priority;
     }
-
-    public void setPriority(int priority) {
+    public void    setPriority(int priority) {
         this.priority = priority;
     }
-
-    public String getDescription() {
+    public String  getDescription() {
         return description;
     }
-
-    public void setDescription(String description) {
+    public void    setDescription(String description) {
         this.description = description;
     }
-
-    public String getComment() {
+    public String  getComment() {
         return comment;
     }
-
-    public void setComment(String comment) {
+    public void    setComment(String comment) {
         this.comment = comment;
     }
-
-    public String getTaskId() {
+    public String  getTaskId() {
         return taskId;
     }
-
-    public void setTaskId(String taskId) {
+    public void    setTaskId(String taskId) {
         this.taskId = taskId;
     }
-
     public Boolean getComplete() {
         return isComplete;
     }
-
-    public void setComplete(Boolean complete) {
+    public void    setComplete(Boolean complete) {
         isComplete = complete;
     }
-
-    public int getProgress() {
+    public int     getProgress() {
         return progress;
     }
-
-    public void setProgress(int progress) {
+    public void    setProgress(int progress) {
         this.progress = progress;
     }
-
-    public String getDueDate() {
+    public String  getDueDate() {
         return dueDate;
     }
-
-    public void setDueDate(String dueDate) {
+    public void    setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
-
-    public String getAssignDate() {
+    public String  getAssignDate() {
         return assignDate;
     }
-
-    public void setAssignDate(String assignDate) {
+    public void    setAssignDate(String assignDate) {
         this.assignDate = assignDate;
     }
 }

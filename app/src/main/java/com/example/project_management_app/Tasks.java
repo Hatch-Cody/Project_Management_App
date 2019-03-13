@@ -8,7 +8,6 @@ public class Tasks {
     public TaskItems getTaskItems() {
         return taskItems;
     }
-
     public void setTaskItems(TaskItems taskItems) {
         this.taskItems = taskItems;
     }
