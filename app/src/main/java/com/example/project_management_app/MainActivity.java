@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -97,17 +98,24 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_task_list) {
             // Handle the actions for selected menu items
+            Log.i("Menu Button pushes", "Changing to task list");
         } else if (id == R.id.nav_new_task) {
+            Log.i("Menu Button pushes", "Changing to new task");
 
         } else if (id == R.id.nav_groups) {
+            Log.i("Menu Button pushes", "Changing to groups");
 
         } else if (id == R.id.nav_add_group) {
+            Log.i("Menu Button pushes", "Changing to add group");
 
         } else if (id == R.id.nav_messages) {
+            Log.i("Menu Button pushes", "Changing to messages");
 
         } else if (id == R.id.nav_settings) {
+            Log.i("Menu Button pushes", "Changing to settings");
 
         } else if (id == R.id.nav_logout) {
+            Log.i("Menu Button pushes", "Changing to logout");
 
         }
 
