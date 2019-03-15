@@ -18,4 +18,10 @@
     <string name="tasks">Tasks</string>
     <string name="active">Active</string>
     <string name="title_activity_tasks_new_task">tasks_newTask</string>
+    <string name="name">Name:</string>
+    <string name="taskName">Task Name:</string>
+    <string name="taskDescription">Task Description:</string>
+    <string name="taskPriority">Task Priority:</string>
+    <string name="taskProgress">Task Progress:</string>
+    <string name="taskDueDate">Task Due Date:</string>
 </resources>

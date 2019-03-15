@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class TasksTest {
     @Test
     public void SetTaskNameTest(){
-        TaskItems t = new TaskItems();
+        Task t = new Task();
         t.setTaskName("null");
 
         assertEquals("null", t.getTaskName());

@@ -1,6 +1,6 @@
 package com.example.project_management_app;
 
-public class TaskItems {
+public class Task {
     private String TaskName;
     private int priority;
     private Boolean isComplete;
@@ -10,6 +10,21 @@ public class TaskItems {
     private String dueDate;
     private String assignDate;
     private String taskId;
+
+    public Task() {
+    }
+
+    public Task(String taskName, int priority, Boolean isComplete, int progress, String description, String comment, String dueDate, String assignDate, String taskId) {
+        TaskName = taskName;
+        this.priority = priority;
+        this.isComplete = isComplete;
+        this.progress = progress;
+        this.description = description;
+        this.comment = comment;
+        this.dueDate = dueDate;
+        this.assignDate = assignDate;
+        this.taskId = taskId;
+    }
 
     public String  getTaskName() {
         return TaskName;
