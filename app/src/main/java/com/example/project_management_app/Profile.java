@@ -19,7 +19,7 @@ public class Profile {
     private Queue<Integer> hours;
     private Boolean isLoggedIn;
     private double userId;
-    private Vector<Tasks> t;
+    private Vector<DoNotUse> t;
 
     //constructor for testing some stuff...
     Profile() {
@@ -131,11 +131,11 @@ public class Profile {
         this.userId = userId;
     }
 
-    public Vector<Tasks> getTaks() {
+    public Vector<DoNotUse> getTaks() {
         return t;
     }
 
-    public void setTasks(Vector<Tasks> t) {
+    public void setTasks(Vector<DoNotUse> t) {
         this.t = t;
     }
 

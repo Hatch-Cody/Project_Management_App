@@ -15,6 +15,7 @@ public class Profile_page extends AppCompatActivity {
         setContentView(R.layout.activity_profile_page);
     myDialog= new Dialog(this);
     }
+
     public void CreatePopup(View v){
         TextView close;
         Button createUser;
