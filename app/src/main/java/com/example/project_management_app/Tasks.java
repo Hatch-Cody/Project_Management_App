@@ -3,13 +3,12 @@ package com.example.project_management_app;
 
 public class Tasks {
 
-    private TaskItems taskItems;
+    private Task task;
 
-    public TaskItems getTaskItems() {
-        return taskItems;
+    public Task getTask() {
+        return task;
     }
-
-    public void setTaskItems(TaskItems taskItems) {
-        this.taskItems = taskItems;
+    public void setTask(Task task) {
+        this.task = task;
     }
 }

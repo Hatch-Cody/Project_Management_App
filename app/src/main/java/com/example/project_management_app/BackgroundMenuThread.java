@@ -5,11 +5,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.Map;
-import java.util.Objects;
 
 /****
  * BACKGROUND MENU THREAD:
@@ -21,7 +16,7 @@ public class BackgroundMenuThread extends Thread {
     private TextView user_textView;
     private ImageView user_profile_pic;
     private Handler handler;
-    private Context context; //in case we want to add context functionality
+    private Context context;        //in case we want to add context functionality
     private Profile userProfile;
 
     BackgroundMenuThread(TextView email_textView, TextView user_textView, Handler h, Context c, Profile profile){
