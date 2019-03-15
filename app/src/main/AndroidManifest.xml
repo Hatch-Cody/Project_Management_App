@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Tasks_Page"></activity>
+        <activity
+            android:name=".tasks_newTask"
+            android:label="@string/title_activity_tasks_new_task"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Tasks_Page" />
         <activity android:name=".Profile_page" />
         <activity android:name=".home" />
         <activity
