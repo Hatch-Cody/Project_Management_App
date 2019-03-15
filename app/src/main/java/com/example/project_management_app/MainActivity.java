@@ -1,5 +1,6 @@
 package com.example.project_management_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_groups) {
             Log.i("Menu Button pushes", "Changing to groups");
-
+            startActivity(new Intent(MainActivity.this, Profile_page.class));
         } else if (id == R.id.nav_add_group) {
             Log.i("Menu Button pushes", "Changing to add group");
 
