@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 ////////////////////////////////////////////////////////////CALLING TWICE?????
+                Log.d(tag, "AUHTSTATE CHANGED");
                 if(firebaseAuth.getCurrentUser() == null){
                     Log.d(tag, "User Not logged in, starting: LOGIN_ACTIVITY");
                     startActivity(new Intent(MainActivity.this, Login_Activity.class));
@@ -173,8 +174,8 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    public void onStop(){
-        super.onStop();
+    public void onDestroy(){
+        super.onDestroy();
         signOut();
     }
 
