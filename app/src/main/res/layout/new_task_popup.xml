@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="To Be Completed By: "
+            android:text="Due Date:"
             android:textColor="@color/lightBlue"
             android:textSize="15dp"
             android:textStyle="bold" />
@@ -117,11 +117,11 @@
             android:layout_margin="5dp"/>
 
         <Button
+            android:id="@+id/createTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Create"
-            android:id="@+id/createUser"/>
+            android:text="Create" />
     </LinearLayout>
 
 

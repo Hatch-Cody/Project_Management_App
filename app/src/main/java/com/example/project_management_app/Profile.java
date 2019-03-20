@@ -20,7 +20,7 @@ public class Profile {
     private Queue<Integer> hours;
     private Boolean isLoggedIn;
     private double userId;
-    private Vector<Tasks> t;
+    private Vector<Task> t;
     private Bitmap profilePic;
 
     /**
@@ -135,11 +135,11 @@ public class Profile {
         this.userId = userId;
     }
 
-    public Vector<Tasks> getTaks() {
+    public Vector<Task> getTaks() {
         return t;
     }
 
-    public void setTasks(Vector<Tasks> t) {
+    public void setTasks(Vector<Task> t) {
         this.t = t;
     }
 
