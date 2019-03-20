@@ -2,24 +2,34 @@ package com.example.project_management_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.os.Handler;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Profile userProfile = new Profile();
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private String tag = "MAIN_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +57,34 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //////////////////////////////////////LOGIN/////////////////////////////////////////////////
+        FirebaseApp.initializeApp(MainActivity.this);
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                ////////////////////////////////////////////////////////////CALLING TWICE?????
+                if(firebaseAuth.getCurrentUser() == null){
+                    Log.d(tag, "User Not logged in, starting: LOGIN_ACTIVITY");
+                    startActivity(new Intent(MainActivity.this, Login_Activity.class));
+                }else{
+                    userProfile.setEmail("");
+                    userProfile.setUserName("Logged in User");
+                    Log.d(tag, "User Profile Loaded to App...");
+
+                    invalidateOptionsMenu();
+                    Log.d(tag, "Menu Invalidated.");
+
+                }
+            }
+        };
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
@@ -61,18 +99,21 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        String tag = "Menu";
+        Log.d(tag, "Creating new menu...");
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
         final Handler handler = new Handler();
-        Profile testP = new Profile();///////////////////////////////Will be passed proper profile on login
 
         TextView email_drawer_header = (TextView) findViewById(R.id.email_drawer_header);
         TextView userName_drawer_header = (TextView) findViewById(R.id.userName_drawer_header);
         ImageView profile_pic_header; ////////////////////////////Will pass profile pic when set up
 
-        BackgroundMenuThread menuSet = new BackgroundMenuThread(email_drawer_header, userName_drawer_header, handler, MainActivity.this, testP);
+        BackgroundMenuThread menuSet = new BackgroundMenuThread(email_drawer_header, userName_drawer_header, handler, MainActivity.this, userProfile);
         menuSet.run();
+        Log.d(tag, "Menu Created.");
         return true;
     }
 
@@ -115,9 +156,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
             Log.i("Menu Button pushes", "Changing to settings");
 
+        }else if (id == R.id.nav_login) {
+            startActivity(new Intent(MainActivity.this, Login_Activity.class));
         } else if (id == R.id.nav_logout) {
-            Log.i("Menu Button pushes", "Changing to logout");
-
+            signOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -128,4 +170,22 @@ public class MainActivity extends AppCompatActivity
     public void loginProfile(){
 
     }
+
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        signOut();
+    }
+
+    public void signOut(){
+        FirebaseAuth.getInstance().signOut();
+        Toast.makeText(MainActivity.this, "User Logged Out", Toast.LENGTH_LONG).show();
+        Log.d("SIGN OUT()", "User Signed Out.");
+    }
+
 }
+
+
+
+

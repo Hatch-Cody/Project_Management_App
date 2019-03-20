@@ -29,7 +29,9 @@ public class BackgroundMenuThread extends Thread {
 
     @Override
     public void run(){
-        Log.d("Background Menu Thread", "Starting Background Menu Thread...");
+
+        final String tag = "Background Menu Thread";
+        Log.d(tag, "Starting Background Menu Thread...");
 
         final String e = userProfile.getEmail();
         final String u = userProfile.getUserName();
@@ -39,7 +41,7 @@ public class BackgroundMenuThread extends Thread {
             public void run() {
                 email_textView.setText(e);
                 user_textView.setText(u);
-                Log.d("Background Menu Thread", "Header set, Terminating Thread...");
+                Log.d(tag, "Header set, Terminating Thread.");
             }
         });
 
