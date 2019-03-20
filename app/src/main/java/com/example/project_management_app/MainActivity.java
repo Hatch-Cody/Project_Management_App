@@ -141,6 +141,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_task_list) {
             // Handle the actions for selected menu items
             Log.i("Menu Button pushes", "Changing to task list");
+            startActivity(new Intent(MainActivity.this, tasks_newTask.class));
+
         } else if (id == R.id.nav_new_task) {
             Log.i("Menu Button pushes", "Changing to new task");
 
