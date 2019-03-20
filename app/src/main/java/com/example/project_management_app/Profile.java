@@ -23,7 +23,9 @@ public class Profile {
     private Vector<Tasks> t;
     private Bitmap profilePic;
 
-    //constructor for testing some stuff...
+    /**
+     * Default constructor for the profile class shows that no user was logged in.
+     */
     Profile() {
         userName = "No User Logged in";
         email = "";
