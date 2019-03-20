@@ -23,6 +23,30 @@
           }
         },
         {
+          "client_id": "970839305957-f3ot8qs3sq9l9lkte2qqu7fqli521fpr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.project_management_app",
+            "certificate_hash": "993acd0eb82418a8d085026c839848bce727ac85"
+          }
+        },
+        {
+          "client_id": "970839305957-192qj90hhgcd1vjlfe5ft8i8j41o4b2f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.project_management_app",
+            "certificate_hash": "65277e01821da8c52798c7d1e00fb0b8d3926492"
+          }
+        },
+        {
+          "client_id": "970839305957-qkcaitvfjm3c80s2knthu1uq1donnkha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.project_management_app",
+            "certificate_hash": "c4c0035627bde5bc36f8d0011d6dabad0ba0a558"
+          }
+        },
+        {
           "client_id": "970839305957-rn2pk7gm95f1g1qbel861hdpq3i6h830.apps.googleusercontent.com",
           "client_type": 3
         }
