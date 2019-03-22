@@ -21,6 +21,14 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
+
+import java.util.UUID;
+import java.util.Vector;
 
 
 public class MainActivity extends AppCompatActivity
@@ -29,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     private Profile userProfile = new Profile();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
     private String tag = "MAIN_ACTIVITY";
 
     @Override
@@ -170,8 +179,22 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void loginProfile(){
+    public void upLoadTasks(View view){
 
+        Gson gson = new Gson;
+        Vector<Task> tasks = userProfile.getTasks();
+        for (Task task : tasks) {
+            
+        }
+
+        String path = "fireTasks/" + UUID.randomUUID() + ".txt";
+        StorageReference fireTasksRef = storage.getReference(path);
+
+        StorageMetadata metadata = new StorageMetadata().Builder()
+                .setCustomMetadata("text", overlayText.getText().toString())
+                .build();
+
+        UploadTask uploadTask = fireTasksRef.putBytes()
     }
 
 

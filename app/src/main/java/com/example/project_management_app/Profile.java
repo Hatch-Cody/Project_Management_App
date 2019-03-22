@@ -135,7 +135,7 @@ public class Profile {
         this.userId = userId;
     }
 
-    public Vector<Task> getTaks() {
+    public Vector<Task> getTasks() {
         return t;
     }
 
