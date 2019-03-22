@@ -1,5 +1,6 @@
 package com.example.project_management_app;
 
+import android.graphics.Bitmap;
 import android.view.View;
 
 import java.util.Queue;
@@ -19,12 +20,15 @@ public class Profile {
     private Queue<Integer> hours;
     private Boolean isLoggedIn;
     private double userId;
-    private Vector<Tasks> t;
+    private Vector<Task> t;
+    private Bitmap profilePic;
 
-    //constructor for testing some stuff...
+    /**
+     * Default constructor for the profile class shows that no user was logged in.
+     */
     Profile() {
-        userName = "User Name";
-        email = "User Email";
+        userName = "No User Logged in";
+        email = "";
     }
 
     public String getName() {
@@ -131,13 +135,17 @@ public class Profile {
         this.userId = userId;
     }
 
-    public Vector<Tasks> getTaks() {
+    public Vector<Task> getTasks() {
         return t;
     }
 
-    public void setTasks(Vector<Tasks> t) {
+    public void setTasks(Vector<Task> t) {
         this.t = t;
     }
+
+    public Bitmap getProfilePic() { return profilePic; }
+
+    public void setProfilePic(Bitmap profilePic) { this.profilePic = profilePic; }
 
     public void makeNewTask(View v){
 
