@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity
         Gson gson = new Gson;
         Vector<Task> tasks = userProfile.getTasks();
         for (Task task : tasks) {
-            
+
         }
 
         String path = "fireTasks/" + UUID.randomUUID() + ".txt";
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity
                 .setCustomMetadata("text", overlayText.getText().toString())
                 .build();
 
-        UploadTask uploadTask = fireTasksRef.putBytes()
+        UploadTask uploadTask = fireTasksRef.putBytes();
     }
 
 
