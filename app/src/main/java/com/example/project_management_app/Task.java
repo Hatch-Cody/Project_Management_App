@@ -44,7 +44,6 @@ public class Task {
     public String getTaskName() {
         return TaskName;
     }
-
     public void setTaskName(String taskName) {
         TaskName = taskName;
     }
@@ -52,7 +51,6 @@ public class Task {
     public int getPriority() {
         return priority;
     }
-
     public void setPriority(int priority) {
         this.priority = priority;
     }
@@ -60,15 +58,11 @@ public class Task {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
+    public String getComment() { return comment; }
     public void setComment(String comment) {
         this.comment = comment;
     }
@@ -76,7 +70,6 @@ public class Task {
     public String getTaskId() {
         return taskId;
     }
-
     public void setTaskId(String taskId) {
         this.taskId = taskId;
     }
@@ -84,7 +77,6 @@ public class Task {
     public Boolean getComplete() {
         return isComplete;
     }
-
     public void setComplete(Boolean complete) {
         isComplete = complete;
     }
@@ -92,7 +84,6 @@ public class Task {
     public int getProgress() {
         return progress;
     }
-
     public void setProgress(int progress) {
         this.progress = progress;
     }
@@ -100,7 +91,6 @@ public class Task {
     public String getDueDate() {
         return dueDate;
     }
-
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
@@ -108,7 +98,6 @@ public class Task {
     public String getAssignDate() {
         return assignDate;
     }
-
     public void setAssignDate(String assignDate) {
         this.assignDate = assignDate;
     }
