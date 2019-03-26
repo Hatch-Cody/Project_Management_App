@@ -42,6 +42,7 @@ public class tasks_newTask extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Toast.makeText(tasks_newTask.this, "Connected to database", Toast.LENGTH_SHORT).show();
                 list = new ArrayList<Task>();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
@@ -57,6 +58,14 @@ public class tasks_newTask extends AppCompatActivity {
                 Toast.makeText(tasks_newTask.this, "Unable to connect to database", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void upLoadTasks(View view) {
+        Task t = new Task("Clean Room", 5, Boolean.FALSE,
+                0, "", "", "Tuesday",
+                "Friday", "123");
+
+        reference.child("Tasks").child(t.getTaskId()).setValue(t);
     }
 
     public void CreatePopup(View v){
