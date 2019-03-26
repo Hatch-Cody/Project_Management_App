@@ -39,21 +39,16 @@ public class Profile {
         this.name = name;
     }
 
-    public String comparePassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    /*
     public Boolean isManager() {
+
         return isManager;
     }
 
     public void setManager(Boolean manager) {
         isManager = manager;
     }
+    */
 
     public String getUserName() {
         return userName;
@@ -63,6 +58,7 @@ public class Profile {
         this.userName = userName;
     }
 
+
     public Boolean getActive() {
         return isActive;
     }
@@ -70,6 +66,7 @@ public class Profile {
     public void setActive(Boolean active) {
         isActive = active;
     }
+
 
     public String getEmployeeId() {
         return EmployeeId;
@@ -111,6 +108,7 @@ public class Profile {
         this.position = position;
     }
 
+    /*
     public Queue<Integer> getHours() {
         return hours;
     }
@@ -118,6 +116,7 @@ public class Profile {
     public void setHours(Queue<Integer> hours) {
         this.hours = hours;
     }
+    */
 
     public Boolean isLoggedIn() {
         return isLoggedIn;
