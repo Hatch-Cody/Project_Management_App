@@ -23,7 +23,9 @@ public class Profile {
     private Vector<Task> t;
     private Bitmap profilePic;
 
-    //constructor for testing some stuff...
+    /**
+     * Default constructor for the profile class shows that no user was logged in.
+     */
     Profile() {
         userName = "No User Logged in";
         email = "";
@@ -133,7 +135,7 @@ public class Profile {
         this.userId = userId;
     }
 
-    public Vector<Task> getTaks() {
+    public Vector<Task> getTasks() {
         return t;
     }
 
