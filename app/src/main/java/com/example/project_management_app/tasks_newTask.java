@@ -73,7 +73,7 @@ public class tasks_newTask extends AppCompatActivity {
         Button createTask;
         myDialog.setContentView(R.layout.new_task_popup);
         close = (TextView) myDialog.findViewById(R.id.close);
-        createTask = (Button) myDialog.findViewById(R.id.createTask);
+        createTask = (Button) myDialog.findViewById(R.id.newTaskFAB);
         close.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
