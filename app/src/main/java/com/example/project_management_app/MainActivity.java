@@ -24,6 +24,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class MainActivity extends AppCompatActivity
@@ -35,7 +36,9 @@ public class MainActivity extends AppCompatActivity
     //private FirebaseStorage storage = FirebaseStorage.getInstance();
     private DatabaseReference mDataBase = FirebaseDatabase.getInstance().getReference();
     private String tag = "MAIN_ACTIVITY";
-
+    // instance of firestore
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
