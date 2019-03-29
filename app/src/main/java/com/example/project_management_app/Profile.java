@@ -7,7 +7,8 @@ import java.util.Queue;
 import java.util.Vector;
 
 public class Profile {
-    private String name;
+    private static String firstName;
+    private static String lastName;
     private String userName;
     private String password;
     private Boolean isActive;
@@ -31,12 +32,20 @@ public class Profile {
         email = "";
     }
 
-    public String getName() {
-        return name;
+    public static final String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public static final String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /*

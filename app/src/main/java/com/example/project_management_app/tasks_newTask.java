@@ -21,13 +21,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class creates new tasks from a popup window and then adds them to the database
+ */
 public class tasks_newTask extends AppCompatActivity {
     private static final String TAG = "DatabaseInformation";
 
@@ -92,16 +94,6 @@ public class tasks_newTask extends AppCompatActivity {
         });
     }
 
-    /*
-    public void upLoadTasks(View view) {
-        Task t = new Task("Clean Room", 5, Boolean.FALSE,
-                0, "", "", "Tuesday",
-                "Friday", "123");
-
-        reference.child("Tasks").child(t.getTaskId()).setValue(t);
-    }
-    */
-
     // Creates a popup when the FAB (Floating Action Button) is clicked
     public void CreatePopup(View v) {
         TextView close;
@@ -118,10 +110,11 @@ public class tasks_newTask extends AppCompatActivity {
         myDialog.show();
     }
 
-    // Reads the information from the popup into the database
+    // Read the information from the popup into the database
+    public void uploadTask(View v) {
+        Log.d(TAG, "uploadTask() called");
 
-    public void uploadTask() {
-
+        // Get task information from the popup window
         createTaskButton = (Button) findViewById(R.id.createTaskButton);
         newTaskName = (EditText) findViewById(R.id.newTaskName);
         newTaskPriority = (EditText) findViewById(R.id.newTaskPriority);
@@ -130,157 +123,33 @@ public class tasks_newTask extends AppCompatActivity {
         newTaskDueDate = (EditText) findViewById(R.id.newTaskDueDate);
         newTaskDescription = (EditText) findViewById(R.id.newTaskDescription);
 
-        // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
+        // Create a new task with the information
+        Map<String, Object> task = new HashMap<>();
+        task.put("taskName", newTaskName);
+        task.put("priority", newTaskPriority);
+        task.put("assignedTo", newTaskAssignTo);
+        task.put("assignDate", newTaskAssignDate);
+        task.put("dueDate", newTaskDueDate);
+        task.put("description", newTaskDescription);
 
         // Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("Tasks").document("Task").set(task)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(tasks_newTask.this, "Task Added Successfully!",
+                                Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+                        Toast.makeText(tasks_newTask.this, "ERROR" +e.toString(),
+                                Toast.LENGTH_SHORT).show();
+                        Log.d("TAG", "problem adding task to database!");
                     }
                 });
     }
-
-
-
-    /*
-    public void uploadTask() {
-
-        Log.d(TAG, "uploadTask() called");
-
-        createTaskButton = (Button) findViewById(R.id.createTaskButton);
-        newTaskName = (EditText) findViewById(R.id.newTaskName);
-        newTaskPriority = (EditText) findViewById(R.id.newTaskPriority);
-        newTaskAssignTo = (EditText) findViewById(R.id.newTaskAssignTo);
-        newTaskAssignDate = (EditText) findViewById(R.id.newTaskAssignDate);
-        newTaskDueDate = (EditText) findViewById(R.id.newTaskDueDate);
-        newTaskDescription = (EditText) findViewById(R.id.newTaskDescription);
-
-        // declare database reference object. Must be signed in to access
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        reference = mFirebaseDatabase.getReference();
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    //toastMessage("Successfully signed in with: " + user.getEmail());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                    //toastMessage("Successfully signed out.");
-                }
-            }
-        };
-
-        // read from the database
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // this is called whenever data at this location is updated
-                Object value = dataSnapshot.getValue();
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-
-            }
-        });
-
-        createTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: Attempting to add task to database.");
-
-                // Save the task name to the database
-                String newName = newTaskName.getText().toString();
-                if(!newName.equals("")){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    String userID = user.getUid();
-                    reference.child(userID).child("Tasks").child("Task").child("taskName").setValue(newName);
-                    toastMessage("Adding " + newName + " to database...");
-                    //reset the text
-                    newTaskName.setText("");
-                }
-
-                // Save the task priority to the database
-                String newPriority = newTaskPriority.getText().toString();
-                if(!newPriority.equals("")){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    String userID = user.getUid();
-                    reference.child(userID).child("Task").child("Task").child("priority").setValue(newPriority);
-                    toastMessage("Adding " + newPriority + " to database...");
-                    //reset the text
-                    newTaskPriority.setText("");
-                }
-
-                // Save the task assignedTo to the database
-                String newAssignedTo = newTaskAssignTo.getText().toString();
-                if(!newAssignedTo.equals("")){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    String userID = user.getUid();
-                    reference.child(userID).child("Task").child("Task").child("assignedTo").setValue(newAssignedTo);
-                    toastMessage("Adding " + newAssignedTo + " to database...");
-                    //reset the text
-                    newTaskAssignTo.setText("");
-                }
-
-                // Save the task assignedDate to the database
-                String newAssignedDate = newTaskAssignDate.getText().toString();
-                if(!newAssignedDate.equals("")){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    String userID = user.getUid();
-                    reference.child(userID).child("Task").child("Task").child("assignedDate").setValue(newAssignedDate);
-                    toastMessage("Adding " + newAssignedDate + " to database...");
-                    //reset the text
-                    newTaskAssignDate.setText("");
-                }
-
-                // Save the task dueDate to the database
-                String newDueDate = newTaskDueDate.getText().toString();
-                if(!newDueDate.equals("")){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    String userID = user.getUid();
-                    reference.child(userID).child("Task").child("Task").child("dueDate").setValue(newDueDate);
-                    toastMessage("Adding " + newDueDate + " to database...");
-                    //reset the text
-                    newTaskDueDate.setText("");
-                }
-
-                // Save the task description to the database
-                String newDescription = newTaskDescription.getText().toString();
-                if(!newDescription.equals("")){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    String userID = user.getUid();
-                    reference.child(userID).child("Task").child("Task").child("description").setValue(newDescription);
-                    toastMessage("Adding " + newDescription + " to database...");
-                    //reset the text
-                    newTaskDescription.setText("");
-                }
-            }
-        });
-    }
-    */
-
 
     @Override
     public void onStart() {
