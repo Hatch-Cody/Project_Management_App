@@ -1,5 +1,6 @@
 package com.example.project_management_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -33,12 +34,12 @@ public class Add_Task extends AppCompatActivity {
     // Task variables
     TextView title;
     EditText newTaskName,
-            newTaskPriority,
-            newTaskAssignTo,
-            newTaskAssignDate,
-            newTaskDescription,
-            newTaskDueDate;
-    Button createTaskButton;
+             newTaskPriority,
+             newTaskAssignTo,
+             newTaskAssignDate,
+             newTaskDescription,
+             newTaskDueDate;
+    Button   createTaskButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class Add_Task extends AppCompatActivity {
         newTaskAssignDate = (EditText) findViewById(R.id.newTaskAssignDate);
         newTaskDueDate = (EditText) findViewById(R.id.newTaskDueDate);
         newTaskDescription = (EditText) findViewById(R.id.newTaskDescription);
+
         // Watches Button Create in activity_add_task.xml
         createTaskButton.setOnClickListener(new View.OnClickListener() {
             // When Create Button is clicked this function is called
@@ -83,6 +85,8 @@ public class Add_Task extends AppCompatActivity {
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(Add_Task.this, "Task Added Successfully!",
                                         Toast.LENGTH_SHORT).show();
+                                //RETURN TO TASK_NEWTASK IF IT IS SUCCESSFUL
+                                startActivity(new Intent(Add_Task.this, tasks_newTask.class));
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
