@@ -154,6 +154,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_new_task) {
             Log.i("Menu Button pushes", "Changing to new task");
+            startActivity(new Intent(MainActivity.this, Add_Task.class));
 
         } else if (id == R.id.nav_groups) {
             Log.i("Menu Button pushes", "Changing to groups");
