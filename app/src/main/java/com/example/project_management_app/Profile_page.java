@@ -7,13 +7,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Profile_page extends AppCompatActivity {
     Dialog myDialog;
+    FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
     myDialog= new Dialog(this);
+
+//        FirebaseApp.initializeApp(Profile_page.this);
+//        mAuth = FirebaseAuth.getInstance();
     }
     public void CreatePopup(View v){
         TextView close;
