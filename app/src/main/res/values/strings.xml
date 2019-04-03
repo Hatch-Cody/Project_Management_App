@@ -32,5 +32,7 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+    <string name="assignTo">Assign To:</string>
+    <string name="dueDate">Due Date:</string>
 
 </resources>

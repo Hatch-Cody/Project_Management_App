@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
  * This class creates new tasks from a popup window and then adds them to the database
  */
 public class tasks_newTask extends AppCompatActivity {
-    private static final String TAG = "DatabaseInformation";
+    private static final String TAG = "AppDatabaseInformation";
 
     Dialog myDialog;
     private RecyclerView recyclerView;
@@ -43,6 +43,8 @@ public class tasks_newTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks_viewer);
 
+        Log.d(TAG, "Inside onCreate of tasks_newTask");
+
         tasksList = new ArrayList<>();
         taskAdapter = new TaskAdapter(tasksList);
 
@@ -55,20 +57,30 @@ public class tasks_newTask extends AppCompatActivity {
 
         db.collection("Tasks").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
 
                 if (e != null) {
+
                     Log.d(TAG, "Error: " + e.getMessage());
                 }
-                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-                    
+
+                for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                    Log.d(TAG, "Inside for loop of onEvent");
+
                     if (doc.getType() == DocumentChange.Type.ADDED) {
+                                Log.d(TAG, "Inside if statement of onEvent in tasks_newTask");
+
                         Task task = doc.getDocument().toObject(Task.class);
+
+                                Log.d(TAG, "Inside if statement of onEvent in tasks_newTask after task assign");
+
                         tasksList.add(task);
+
+                                Log.d(TAG, "Inside if statement of onEvent in tasks_newTask ofter tasksList.add(task)");
 
                         taskAdapter.notifyDataSetChanged();
 
-                        Log.d(TAG, "Reading into recyclerView");
+                                Log.d(TAG, "Reading into recyclerView");
                     }
                 }
             }
