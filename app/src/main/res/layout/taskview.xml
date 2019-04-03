@@ -26,6 +26,14 @@
             android:textStyle="bold"
             android:id="@+id/taskDescription"/>
 
+        <TextView
+            android:id="@+id/taskAssignDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dueDate"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -40,13 +48,14 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:id="@+id/taskPriority"/>
+
         <TextView
+            android:id="@+id/taskAssignTo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/taskProgress"
+            android:text="@string/assignTo"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:id="@+id/taskProgress"/>
+            android:textStyle="bold" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -5,9 +5,9 @@ package com.example.project_management_app;
  */
 public class Task {
     private String TaskName;
-    private int priority;
+    private String priority;
     private Boolean isComplete;
-    private int progress;
+    //private int progress;
     private String assignTo;
     private String description;
     private String dueDate;
@@ -29,7 +29,7 @@ public class Task {
      * @param assignDate
      * @param taskId
      */
-    public Task(String taskName, int priority, Boolean isComplete, String assignTo, String description, String dueDate, String assignDate, String taskId) {
+    public Task(String taskName, String priority, Boolean isComplete, String assignTo, String description, String dueDate, String assignDate, String taskId) {
         TaskName = taskName;
         this.priority = priority;
         this.isComplete = isComplete;
@@ -49,10 +49,10 @@ public class Task {
         TaskName = taskName;
     }
 
-    public int getPriority() {
+    public String getPriority() {
         return priority;
     }
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 
@@ -84,13 +84,14 @@ public class Task {
     public void setComplete(Boolean complete) {
         isComplete = complete;
     }
-
+/*
     public int getProgress() {
         return progress;
     }
     public void setProgress(int progress) {
         this.progress = progress;
     }
+    */
 
     public String getDueDate() {
         return dueDate;

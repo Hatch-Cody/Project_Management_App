@@ -6,11 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Add_Task extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItemSelectedListener */ {
     private static final String TAG = "DatabaseInformation";
 
     // database references
@@ -47,23 +44,27 @@ public class Add_Task extends AppCompatActivity implements AdapterView.OnItemSel
              newTaskDueDate;
     Button   createTaskButton;
 
+    //Spinner prioritySpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__task);
 
+        /*
         // Spinner for selecting the priority of a task
-        Spinner prioritySpinner = findViewById(R.id.newTaskPriority);
+        prioritySpinner = (Spinner) findViewById(R.id.newTaskPriority);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.priority_numbers, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         prioritySpinner.setAdapter(adapter);
         prioritySpinner.setOnItemSelectedListener(this);
+        */
 
         //Set task variables
         createTaskButton   = (Button)   findViewById(R.id.createTaskButton);
         title              = (TextView) findViewById(R.id.title);
         newTaskName        = (EditText) findViewById(R.id.newTaskName);
-        //newTaskPriority    = (EditText) findViewById(R.id.newTaskPriority);
+        newTaskPriority    = (EditText) findViewById(R.id.newTaskPriority);
         newTaskAssignTo    = (EditText) findViewById(R.id.newTaskAssignTo);
         newTaskAssignDate  = (EditText) findViewById(R.id.newTaskAssignDate);
         newTaskDueDate     = (EditText) findViewById(R.id.newTaskDueDate);
@@ -114,6 +115,7 @@ public class Add_Task extends AppCompatActivity implements AdapterView.OnItemSel
         });
     }
 
+    /*
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Object priority = parent.getItemAtPosition(position);
@@ -124,4 +126,5 @@ public class Add_Task extends AppCompatActivity implements AdapterView.OnItemSel
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+    */
 }
