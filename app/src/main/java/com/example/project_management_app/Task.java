@@ -8,6 +8,7 @@ public class Task {
     private int priority;
     private Boolean isComplete;
     private int progress;
+    private String assignTo;
     private String description;
     private String dueDate;
     private String assignDate;
@@ -28,11 +29,12 @@ public class Task {
      * @param assignDate
      * @param taskId
      */
-    public Task(String taskName, int priority, Boolean isComplete, int progress, String description, String dueDate, String assignDate, String taskId) {
+    public Task(String taskName, int priority, Boolean isComplete, String assignTo, String description, String dueDate, String assignDate, String taskId) {
         TaskName = taskName;
         this.priority = priority;
         this.isComplete = isComplete;
-        this.progress = progress;
+        this.assignTo = assignTo;
+        //this.progress = progress;
         this.description = description;
         //this.comment = comment;
         this.dueDate = dueDate;
@@ -102,5 +104,12 @@ public class Task {
     }
     public void setAssignDate(String assignDate) {
         this.assignDate = assignDate;
+    }
+
+    public String getAssignTo() {
+        return assignTo;
+    }
+    public void setAssignTo(String assignTo) {
+        this.assignTo = assignTo;
     }
 }
