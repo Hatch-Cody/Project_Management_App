@@ -63,12 +63,13 @@ public class tasks_newTask extends AppCompatActivity {
                 for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
                     
                     if (doc.getType() == DocumentChange.Type.ADDED) {
-                        Task task = doc.getDocument().toObject(Task.class);
-                        tasksList.add(task);
+                        String name = doc.getDocument().getString("assignedTo");
 
-                        taskAdapter.notifyDataSetChanged();
+                        //tasksList.add(task);
 
-                        Log.d(TAG, "Reading into recyclerView");
+                        //taskAdapter.notifyDataSetChanged();
+
+                        Log.d(TAG, "Name" + name);
                     }
                 }
             }

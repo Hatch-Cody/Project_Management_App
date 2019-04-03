@@ -39,8 +39,8 @@ public class BackgroundMenuThread extends Thread {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                email_textView.setText(e);
-                user_textView.setText(u);
+                email_textView.setText(e);  // I'm being told there is an error and its starting
+                user_textView.setText(u);  // here on line 42.
                 Log.d(tag, "Header set, Terminating Thread.");
             }
         });
