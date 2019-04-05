@@ -1,5 +1,6 @@
 package com.example.project_management_app;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +27,16 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nullable;
 
 
 public class MainActivity extends AppCompatActivity
@@ -38,7 +50,10 @@ public class MainActivity extends AppCompatActivity
     private String tag = "MAIN_ACTIVITY";
     // instance of firestore
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    
+    Dialog myDialog;
+    private RecyclerView recyclerView;
+    private List<Task> tasksList;
+    TaskAdapter taskAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +102,50 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
+        // TESTING FOR TOP PRIORITY TASKS TO DISPLAY ON THE HOME SCREEN NEEDS TO BE CLEANED ONCE
+        // EVERYTHING ELSE IS DONE
+        displayPriorityTaks();
+        tasksList = new ArrayList<>();
+        taskAdapter = new TaskAdapter(tasksList);
+        db = FirebaseFirestore.getInstance();
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(taskAdapter);
+        db.collection("Tasks").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.d(tag, "Error: " + e.getMessage());
+                }
+                for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                    Log.d(tag, "Inside for loop of onEvent");
 
+                    if (doc.getType() == DocumentChange.Type.ADDED) {
+                        Log.d(tag, "Inside if statement of onEvent in tasks_newTask");
+                        Task task =new Task();
+                        task = doc.getDocument().toObject(Task.class);
+
+                        if(task.getPriority().equals("1")) {
+                            Log.d(tag, "Inside if statement of onEvent in tasks_newTask after task assign when priority == 1");
+                            tasksList.add(task);
+                        }
+
+                        Log.d(tag, "Inside if statement of onEvent in tasks_newTask ofter tasksList.add(task)");
+
+                        taskAdapter.notifyDataSetChanged();
+
+                        Log.d(tag, "Reading into recyclerView");
+                    }
+                }
+            }
+        });
+    }
+    //END OF TESTING
+
+    protected void displayPriorityTaks(){
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
