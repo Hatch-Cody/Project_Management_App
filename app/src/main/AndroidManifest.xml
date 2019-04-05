@@ -15,7 +15,8 @@
         <activity
             android:name=".tasks_newTask"
             android:label="@string/title_activity_tasks_new_task"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".Tasks_Page" />
         <activity android:name=".Profile_page" />
         <activity android:name=".home" />

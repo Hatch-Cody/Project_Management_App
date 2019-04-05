@@ -18,13 +18,14 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:id="@+id/taskName"/>
+
         <TextView
+            android:id="@+id/taskDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/taskDescription"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:id="@+id/taskDescription"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/taskAssignDate"
@@ -65,5 +66,6 @@
             android:id="@+id/taskDueDate"/>
 
     </LinearLayout>
+
 </LinearLayout>
 
