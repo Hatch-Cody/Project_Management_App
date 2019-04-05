@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,41 +77,49 @@ public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 // Create string convert to strings
-                String taskName         = newTaskName.getText().toString();
-                String taskPriority     = newTaskPriority.getText().toString();
-                String taskAssignedTo     = newTaskAssignedTo.getText().toString();
-                String taskAssignDate   = newTaskAssignDate.getText().toString();
-                String taskDueDate      = newTaskDueDate.getText().toString();
-                String taskDescription  = newTaskDescription.getText().toString();
+                String taskName = newTaskName.getText().toString();
+                String taskPriority = newTaskPriority.getText().toString();
+                String taskAssignedTo = newTaskAssignedTo.getText().toString();
+                String taskAssignDate = newTaskAssignDate.getText().toString();
+                String taskDueDate = newTaskDueDate.getText().toString();
+                String taskDescription = newTaskDescription.getText().toString();
 
-                Map<String, Object> task = new HashMap<>();
-                task.put("taskName",    taskName);
-                task.put("priority",    taskPriority);
-                task.put("assignedTo",  taskAssignedTo);
-                task.put("assignDate",  taskAssignDate);
-                task.put("dueDate",     taskDueDate);
-                task.put("description", taskDescription);
+                String currentDate = Calendar.getInstance().getTime().toString();
 
-                // Add a new document with a generated ID
-                db.collection("Tasks")
-                        .add(task)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(Add_Task.this, "Task Added Successfully!",
-                                        Toast.LENGTH_SHORT).show();
-                                //RETURN TO TASK_NEWTASK IF IT IS SUCCESSFUL
-                                startActivity(new Intent(Add_Task.this, tasks_newTask.class));
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Add_Task.this, "ERROR" +e.toString(),
-                                        Toast.LENGTH_SHORT).show();
-                                Log.d("TAG", "problem adding task to database!");
-                            }
-                        });
+                if (!currentDate.equals(taskAssignDate)) {
+                    Toast.makeText(Add_Task.this, "Not a valid date, please re-enter date",
+                            Toast.LENGTH_LONG).show();
+                } else {
+
+                    Map<String, Object> task = new HashMap<>();
+                    task.put("taskName", taskName);
+                    task.put("priority", taskPriority);
+                    task.put("assignedTo", taskAssignedTo);
+                    task.put("assignDate", taskAssignDate);
+                    task.put("dueDate", taskDueDate);
+                    task.put("description", taskDescription);
+
+                    // Add a new document with a generated ID
+                    db.collection("Tasks")
+                            .add(task)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(Add_Task.this, "Task Added Successfully!",
+                                            Toast.LENGTH_SHORT).show();
+                                    //RETURN TO TASK_NEWTASK IF IT IS SUCCESSFUL
+                                    startActivity(new Intent(Add_Task.this, tasks_newTask.class));
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(Add_Task.this, "ERROR" + e.toString(),
+                                            Toast.LENGTH_SHORT).show();
+                                    Log.d("TAG", "problem adding task to database!");
+                                }
+                            });
+                }
             }
         });
     }
