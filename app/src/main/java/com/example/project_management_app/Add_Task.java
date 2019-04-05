@@ -38,7 +38,7 @@ public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItem
     TextView title;
     EditText newTaskName,
              newTaskPriority,
-             newTaskAssignTo,
+             newTaskAssignedTo,
              newTaskAssignDate,
              newTaskDescription,
              newTaskDueDate;
@@ -65,7 +65,7 @@ public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItem
         title              = (TextView) findViewById(R.id.title);
         newTaskName        = (EditText) findViewById(R.id.newTaskName);
         newTaskPriority    = (EditText) findViewById(R.id.newTaskPriority);
-        newTaskAssignTo    = (EditText) findViewById(R.id.newTaskAssignTo);
+        newTaskAssignedTo    = (EditText) findViewById(R.id.newTaskAssignedTo);
         newTaskAssignDate  = (EditText) findViewById(R.id.newTaskAssignDate);
         newTaskDueDate     = (EditText) findViewById(R.id.newTaskDueDate);
         newTaskDescription = (EditText) findViewById(R.id.newTaskDescription);
@@ -78,7 +78,7 @@ public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItem
                 // Create string convert to strings
                 String taskName         = newTaskName.getText().toString();
                 String taskPriority     = newTaskPriority.getText().toString();
-                String taskAssignTo     = newTaskAssignTo.getText().toString();
+                String taskAssignedTo     = newTaskAssignedTo.getText().toString();
                 String taskAssignDate   = newTaskAssignDate.getText().toString();
                 String taskDueDate      = newTaskDueDate.getText().toString();
                 String taskDescription  = newTaskDescription.getText().toString();
@@ -86,7 +86,7 @@ public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItem
                 Map<String, Object> task = new HashMap<>();
                 task.put("taskName",    taskName);
                 task.put("priority",    taskPriority);
-                task.put("assignedTo",  taskAssignTo);
+                task.put("assignedTo",  taskAssignedTo);
                 task.put("assignDate",  taskAssignDate);
                 task.put("dueDate",     taskDueDate);
                 task.put("description", taskDescription);
