@@ -8,7 +8,7 @@ public class Task {
     private String priority;
     private Boolean isComplete;
     //private int progress;
-    private String assignTo;
+    private String assignedTo;
     private String description;
     private String dueDate;
     private String assignDate;
@@ -23,7 +23,7 @@ public class Task {
      * @param taskName
      * @param priority The level of importance for the task between 1 - 5.
      * @param isComplete Returns true if the task has been completed.
-     * @param progress The level of progress for the task from 1 - 5.
+     * @param assignedTo The person the task is assigned to.
      * @param description
      * @param dueDate
      * @param assignDate
@@ -33,7 +33,7 @@ public class Task {
         TaskName = taskName;
         this.priority = priority;
         this.isComplete = isComplete;
-        this.assignTo = assignTo;
+        this.assignedTo = assignTo;
         //this.progress = progress;
         this.description = description;
         //this.comment = comment;
@@ -107,10 +107,10 @@ public class Task {
         this.assignDate = assignDate;
     }
 
-    public String getAssignTo() {
-        return assignTo;
+    public String getAssignedTo() {
+        return assignedTo;
     }
-    public void setAssignTo(String assignTo) {
-        this.assignTo = assignTo;
+    public void setAssignedTo(String assignedTo) {
+        this.assignedTo = assignedTo;
     }
 }
