@@ -24,6 +24,8 @@
     <string name="taskPriority">Task Priority:</string>
     <string name="taskProgress">Task Progress:</string>
     <string name="taskDueDate">Task Due Date:</string>
+    <string name="taskAssignedTo">Task Assign To:</string>
+    <string name="taskAssignDate">Task Assigned Date:</string>
 
     <string-array name="priority_numbers">
         <item>1</item>
@@ -32,7 +34,5 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-    <string name="assignTo">Assign To:</string>
-    <string name="dueDate">Due Date:</string>
 
 </resources>
