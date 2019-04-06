@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity
         //////////////////////////////////////LOGIN/////////////////////////////////////////////////
         FirebaseApp.initializeApp(MainActivity.this);
         mAuth = FirebaseAuth.getInstance();
+        userProfilesRef = FirebaseDatabase.getInstance().getReference("userProfiles");
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -166,6 +167,19 @@ public class MainActivity extends AppCompatActivity
     protected void onStart(){
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+
+        userProfilesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(tag, "OnCancelled triggered:");
+                Log.d(tag, databaseError.toString());
+            }
+        });
     }
 
     @Override
@@ -192,6 +206,7 @@ public class MainActivity extends AppCompatActivity
         //Queries the database for user
         Log.d(tag, "->" + email + "<-| being queried...");
         query = userProfilesRef.orderByChild("userName").equalTo(email);
+        userProfilesRef = query.getRef();
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -245,10 +260,7 @@ public class MainActivity extends AppCompatActivity
 
         if (requestCode == 3 && resultCode == RESULT_OK) {
             String json = i.getStringExtra("json");
-            //UPLOAD NEW PROFILE HERE
-
-
-
+            userProfilesRef.child("json").setValue(json);
         }
     }
 
@@ -289,10 +301,10 @@ public class MainActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_login) {
             //startActivityForResult(new Intent(MainActivity.this, Login_Activity.class), 1);
-            signOut();
+            signOut(1);
 
         } else if (id == R.id.nav_logout) {
-            signOut();
+            signOut(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -302,7 +314,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDestroy(){
-        signOut();
+        signOut(0);
         super.onDestroy();
     }
 
@@ -310,9 +322,13 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(new Intent(MainActivity.this, Login_Activity.class), 1);
     }
 
-    public void signOut(){
+    public void signOut(int flag){
+
+        if(flag == 0) {
+            Toast.makeText(MainActivity.this, "User Logged Out", Toast.LENGTH_SHORT).show();
+        }
+
         FirebaseAuth.getInstance().signOut();
-        Toast.makeText(MainActivity.this, "User Logged Out", Toast.LENGTH_SHORT).show();
         Log.d("SIGN OUT()", "User Signed Out.");
     }
 
