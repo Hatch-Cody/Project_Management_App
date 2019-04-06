@@ -29,7 +29,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -47,6 +46,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+
 
 
 
@@ -145,13 +145,11 @@ public class MainActivity extends AppCompatActivity
                             Log.d(tag, "Inside if statement of onEvent in tasks_newTask after task assign when priority == 1");
                             tasksList.add(task);
                         }
-
                         Log.d(tag, "Inside if statement of onEvent in tasks_newTask ofter tasksList.add(task)");
 
                         taskAdapter.notifyDataSetChanged();
-
-    }
-
+                        Log.d(tag, "Reading into recyclerView");
+                    }
 
                 }
             }
@@ -244,6 +242,14 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 1 && resultCode == RESULT_OK) {
             email = i.getStringExtra("email").trim();
         }
+
+        if (requestCode == 3 && resultCode == RESULT_OK) {
+            String json = i.getStringExtra("json");
+            //UPLOAD NEW PROFILE HERE
+
+
+
+        }
     }
 
     @Override
@@ -272,7 +278,7 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(MainActivity.this, Profile_page.class);
             String json = gson.toJson(userProfile);
             i.putExtra("json", json);
-            startActivity(i);
+            startActivityForResult(i, 3);
         } else if (id == R.id.nav_add_group) {
 
 
