@@ -3,12 +3,26 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nullable;
 
 
 public class Profile_page extends AppCompatActivity {
@@ -17,7 +31,11 @@ public class Profile_page extends AppCompatActivity {
     private EditText phoneField, bioField, posField;
     private Profile userProfile;
     private  Gson gson = new Gson();
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private RecyclerView recyclerView;
+    private List<Task> tasksList;
+    TaskAdapter taskAdapter;
+    private String tag = "PROFILE_PAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +63,42 @@ public class Profile_page extends AppCompatActivity {
             phoneNum.setText(userProfile.getPhoneNumber());
             bio.setText(userProfile.getBio());
         }
+        // TESTING FOR USERS TASKS TO DISPLAY ON THE PROFILE PAGE NEEDS TO BE CLEANED ONCE
+        // EVERYTHING ELSE IS DONE
+        tasksList = new ArrayList<>();
+        taskAdapter = new TaskAdapter(tasksList);
+        db = FirebaseFirestore.getInstance();
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(taskAdapter);
+        db.collection("Tasks").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.d(tag, "Error: " + e.getMessage());
+                }
+                for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                    Log.d(tag, "Inside for loop of onEvent");
+
+                    if (doc.getType() == DocumentChange.Type.ADDED) {
+                        Log.d(tag, "Inside if statement of onEvent in tasks_newTask");
+                        Task task =new Task();
+                        task = doc.getDocument().toObject(Task.class);
+
+                        if(task.getAssignedTo().equals(userProfile.getFirstName())) {
+                            Log.d(tag, "Inside if statement of onEvent in tasks_newTask after task assign when priority == 1");
+                            tasksList.add(task);
+                        }
+                        Log.d(tag, "Inside if statement of onEvent in tasks_newTask ofter tasksList.add(task)");
+
+                        taskAdapter.notifyDataSetChanged();
+                        Log.d(tag, "Reading into recyclerView");
+                    }
+
+                }
+            }
+        });//END OF TESTING
     }
 
 

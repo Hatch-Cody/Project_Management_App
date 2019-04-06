@@ -29,23 +29,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
-
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 
 
@@ -120,7 +116,7 @@ public class MainActivity extends AppCompatActivity
 
         // TESTING FOR TOP PRIORITY TASKS TO DISPLAY ON THE HOME SCREEN NEEDS TO BE CLEANED ONCE
         // EVERYTHING ELSE IS DONE
-        displayPriorityTaks();
+
         tasksList = new ArrayList<>();
         taskAdapter = new TaskAdapter(tasksList);
         db = FirebaseFirestore.getInstance();
@@ -154,13 +150,7 @@ public class MainActivity extends AppCompatActivity
 
                 }
             }
-        });
-    }
-    //END OF TESTING
-
-    protected void displayPriorityTaks(){
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        });//END OF TESTING
     }
 
     @Override
