@@ -65,7 +65,7 @@ public class tasks_newTask extends AppCompatActivity {
                 if (e != null) {
                     Log.d(TAG, "Error: " + e.getMessage());
                 }
-                
+
                 // Loop through database
                 for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
                     Log.d(TAG, "Inside for loop of onEvent");
