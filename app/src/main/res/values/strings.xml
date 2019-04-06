@@ -26,6 +26,7 @@
     <string name="taskDueDate">Due Date: </string>
     <string name="taskAssignedTo">Assigned To: </string>
     <string name="taskAssignDate">Assigned Date: </string>
+    <string name="completed">Completed</string>
 
     <string-array name="priority_numbers">
         <item>1</item>

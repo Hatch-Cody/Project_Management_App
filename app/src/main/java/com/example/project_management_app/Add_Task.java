@@ -19,9 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.DateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,7 +69,7 @@ public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItem
         title              = (TextView) findViewById(R.id.title);
         newTaskName        = (EditText) findViewById(R.id.newTaskName);
         newTaskPriority    = (EditText) findViewById(R.id.newTaskPriority);
-        newTaskAssignedTo    = (EditText) findViewById(R.id.newTaskAssignedTo);
+        newTaskAssignedTo  = (EditText) findViewById(R.id.newTaskAssignedTo);
         newTaskAssignDate  = (EditText) findViewById(R.id.newTaskAssignDate);
         newTaskDueDate     = (EditText) findViewById(R.id.newTaskDueDate);
         newTaskDescription = (EditText) findViewById(R.id.newTaskDescription);

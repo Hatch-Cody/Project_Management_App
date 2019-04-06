@@ -29,11 +29,11 @@ public class Task {
      * @param assignDate
      * @param taskId
      */
-    public Task(String taskName, String priority, Boolean isComplete, String assignTo, String description, String dueDate, String assignDate, String taskId) {
+    public Task(String taskName, String priority, Boolean isComplete, String assignedTo, String description, String dueDate, String assignDate, String taskId) {
         TaskName = taskName;
         this.priority = priority;
         this.isComplete = isComplete;
-        this.assignedTo = assignTo;
+        this.assignedTo = assignedTo;
         //this.progress = progress;
         this.description = description;
         //this.comment = comment;
