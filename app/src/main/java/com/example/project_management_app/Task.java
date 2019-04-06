@@ -5,9 +5,10 @@ package com.example.project_management_app;
  */
 public class Task {
     private String TaskName;
-    private int priority;
+    private String priority;
     private Boolean isComplete;
-    private int progress;
+    //private int progress;
+    private String assignedTo;
     private String description;
     private String dueDate;
     private String assignDate;
@@ -22,17 +23,18 @@ public class Task {
      * @param taskName
      * @param priority The level of importance for the task between 1 - 5.
      * @param isComplete Returns true if the task has been completed.
-     * @param progress The level of progress for the task from 1 - 5.
+     * @param assignedTo The person the task is assigned to.
      * @param description
      * @param dueDate
      * @param assignDate
      * @param taskId
      */
-    public Task(String taskName, int priority, Boolean isComplete, int progress, String description, String dueDate, String assignDate, String taskId) {
+    public Task(String taskName, String priority, Boolean isComplete, String assignTo, String description, String dueDate, String assignDate, String taskId) {
         TaskName = taskName;
         this.priority = priority;
         this.isComplete = isComplete;
-        this.progress = progress;
+        this.assignedTo = assignTo;
+        //this.progress = progress;
         this.description = description;
         //this.comment = comment;
         this.dueDate = dueDate;
@@ -47,10 +49,10 @@ public class Task {
         TaskName = taskName;
     }
 
-    public int getPriority() {
+    public String getPriority() {
         return priority;
     }
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 
@@ -82,13 +84,14 @@ public class Task {
     public void setComplete(Boolean complete) {
         isComplete = complete;
     }
-
+/*
     public int getProgress() {
         return progress;
     }
     public void setProgress(int progress) {
         this.progress = progress;
     }
+    */
 
     public String getDueDate() {
         return dueDate;
@@ -102,5 +105,12 @@ public class Task {
     }
     public void setAssignDate(String assignDate) {
         this.assignDate = assignDate;
+    }
+
+    public String getAssignedTo() {
+        return assignedTo;
+    }
+    public void setAssignedTo(String assignedTo) {
+        this.assignedTo = assignedTo;
     }
 }

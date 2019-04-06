@@ -3,8 +3,13 @@ package com.example.project_management_app;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /****
  * BACKGROUND MENU THREAD:
@@ -12,8 +17,7 @@ import android.widget.TextView;
  * Will take users profile and updates menu with user specific values
  */
 public class BackgroundMenuThread extends Thread {
-    private TextView email_textView;
-    private TextView user_textView;
+    private TextView email_textView,  user_textView;
     private ImageView user_profile_pic;
     private Handler handler;
     private Context context;        //in case we want to add context functionality
@@ -27,6 +31,7 @@ public class BackgroundMenuThread extends Thread {
         context = c;
     }
 
+
     @Override
     public void run(){
 
@@ -34,7 +39,7 @@ public class BackgroundMenuThread extends Thread {
         Log.d(tag, "Starting Background Menu Thread...");
 
         final String e = userProfile.getEmail();
-        final String u = userProfile.getUserName();
+        final String u = (userProfile.getFirstName() + " " + userProfile.getLastName());
 
         handler.post(new Runnable() {
             @Override

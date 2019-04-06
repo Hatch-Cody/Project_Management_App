@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Add_Task extends AppCompatActivity {
+public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItemSelectedListener */ {
     private static final String TAG = "DatabaseInformation";
 
     // database references
@@ -38,23 +38,34 @@ public class Add_Task extends AppCompatActivity {
     TextView title;
     EditText newTaskName,
              newTaskPriority,
-             newTaskAssignTo,
+             newTaskAssignedTo,
              newTaskAssignDate,
              newTaskDescription,
              newTaskDueDate;
     Button   createTaskButton;
+
+    //Spinner prioritySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__task);
 
+        /*
+        // Spinner for selecting the priority of a task
+        prioritySpinner = (Spinner) findViewById(R.id.newTaskPriority);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.priority_numbers, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prioritySpinner.setAdapter(adapter);
+        prioritySpinner.setOnItemSelectedListener(this);
+        */
+
         //Set task variables
         createTaskButton   = (Button)   findViewById(R.id.createTaskButton);
         title              = (TextView) findViewById(R.id.title);
         newTaskName        = (EditText) findViewById(R.id.newTaskName);
         newTaskPriority    = (EditText) findViewById(R.id.newTaskPriority);
-        newTaskAssignTo    = (EditText) findViewById(R.id.newTaskAssignTo);
+        newTaskAssignedTo    = (EditText) findViewById(R.id.newTaskAssignedTo);
         newTaskAssignDate  = (EditText) findViewById(R.id.newTaskAssignDate);
         newTaskDueDate     = (EditText) findViewById(R.id.newTaskDueDate);
         newTaskDescription = (EditText) findViewById(R.id.newTaskDescription);
@@ -67,7 +78,7 @@ public class Add_Task extends AppCompatActivity {
                 // Create string convert to strings
                 String taskName         = newTaskName.getText().toString();
                 String taskPriority     = newTaskPriority.getText().toString();
-                String taskAssignTo     = newTaskAssignTo.getText().toString();
+                String taskAssignedTo     = newTaskAssignedTo.getText().toString();
                 String taskAssignDate   = newTaskAssignDate.getText().toString();
                 String taskDueDate      = newTaskDueDate.getText().toString();
                 String taskDescription  = newTaskDescription.getText().toString();
@@ -75,7 +86,7 @@ public class Add_Task extends AppCompatActivity {
                 Map<String, Object> task = new HashMap<>();
                 task.put("taskName",    taskName);
                 task.put("priority",    taskPriority);
-                task.put("assignedTo",  taskAssignTo);
+                task.put("assignedTo",  taskAssignedTo);
                 task.put("assignDate",  taskAssignDate);
                 task.put("dueDate",     taskDueDate);
                 task.put("description", taskDescription);
@@ -103,4 +114,17 @@ public class Add_Task extends AppCompatActivity {
             }
         });
     }
+
+    /*
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Object priority = parent.getItemAtPosition(position);
+        newTaskPriority = (EditText) priority;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+    */
 }
