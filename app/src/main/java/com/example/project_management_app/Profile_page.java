@@ -1,28 +1,22 @@
 package com.example.project_management_app;
 
-import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
+import android.app.Dialog;
 
 public class Profile_page extends AppCompatActivity {
     Dialog myDialog;
-    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
-    myDialog= new Dialog(this);
-
-//        FirebaseApp.initializeApp(Profile_page.this);
-//        mAuth = FirebaseAuth.getInstance();
+        myDialog= new Dialog(this);
     }
+
     public void CreatePopup(View v){
         TextView close;
         Button createUser;

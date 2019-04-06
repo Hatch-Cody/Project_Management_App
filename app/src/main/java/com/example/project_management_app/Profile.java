@@ -7,7 +7,8 @@ import java.util.Queue;
 import java.util.Vector;
 
 public class Profile {
-    private String name;
+    private String firstName;
+    private String lastName;
     private String userName;
     private String password;
     private Boolean isActive;
@@ -19,39 +20,51 @@ public class Profile {
     private String position;
     private Queue<Integer> hours;
     private Boolean isLoggedIn;
-    private double userId;
-    private Vector<Tasks> t;
+    private String userId;
+    private Vector<Task> t;
     private Bitmap profilePic;
 
-    //constructor for testing some stuff...
-    Profile() {
-        userName = "No User Logged in";
-        email = "";
+    /*
+     * Default constructor for the profile class shows that no user was logged in.
+     */
+    Profile(String userName, String firstName, String lastName, String userId ) {
+        this.userName = userName;
+        this.email = userName;
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public String getName() {
-        return name;
+    Profile(){
+
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public final String getFirstName() {
+        return firstName;
     }
 
-    public String comparePassword() {
-        return password;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public final String getLastName() {
+        return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /*
     public Boolean isManager() {
+
         return isManager;
     }
 
     public void setManager(Boolean manager) {
         isManager = manager;
     }
+    */
 
     public String getUserName() {
         return userName;
@@ -61,6 +74,7 @@ public class Profile {
         this.userName = userName;
     }
 
+
     public Boolean getActive() {
         return isActive;
     }
@@ -68,6 +82,7 @@ public class Profile {
     public void setActive(Boolean active) {
         isActive = active;
     }
+
 
     public String getEmployeeId() {
         return EmployeeId;
@@ -109,6 +124,7 @@ public class Profile {
         this.position = position;
     }
 
+    /*
     public Queue<Integer> getHours() {
         return hours;
     }
@@ -116,6 +132,7 @@ public class Profile {
     public void setHours(Queue<Integer> hours) {
         this.hours = hours;
     }
+    */
 
     public Boolean isLoggedIn() {
         return isLoggedIn;
@@ -125,19 +142,19 @@ public class Profile {
         isLoggedIn = loggedIn;
     }
 
-    public double getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(double userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Vector<Tasks> getTaks() {
+    public Vector<Task> getTasks() {
         return t;
     }
 
-    public void setTasks(Vector<Tasks> t) {
+    public void setTasks(Vector<Task> t) {
         this.t = t;
     }
 
