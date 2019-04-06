@@ -20,6 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
+/**
+ * Handles account creation, instantiates database for user profiles.
+ */
 public class New_Account_Activity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -27,6 +30,7 @@ public class New_Account_Activity extends AppCompatActivity {
     private EditText email, cEmail, password, cPassword, fName, lName;
     private Button create, exit;
     private String tag = "ACCOUNT_CREATION";
+    private String id;
     private Profile profile;
     private DatabaseReference userProfiles;
     private Gson gson = new Gson();;
@@ -50,7 +54,6 @@ public class New_Account_Activity extends AppCompatActivity {
         fName = (EditText) findViewById(R.id.fName);
         userProfiles = FirebaseDatabase.getInstance().getReference("userProfiles");
 
-
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,16 +66,16 @@ public class New_Account_Activity extends AppCompatActivity {
 
                         final String fEmail = email.getText().toString().trim();
                         final String fPassword = password.getText().toString().trim();
-                        final String id = userProfiles.push().getKey();
+                        id = userProfiles.push().getKey();
                         profile = new Profile(fEmail, fName.getText().toString().trim(), lName.getText().toString().trim(), id);
                         proAdapter = new Profile_Adapter(fEmail, id, profile);
                         userProfiles.child(id).setValue(proAdapter);
+
                         Intent i = new Intent();
                         i.putExtra("email", email.getText().toString().trim());
                         setResult(RESULT_OK, i);
                         Log.d(tag, "->" + proAdapter.getJson() + "<-|");
                         createAccount(fEmail, fPassword);
-
 
                         finish();
                     } else {
@@ -84,8 +87,10 @@ public class New_Account_Activity extends AppCompatActivity {
                     Toast.makeText(New_Account_Activity.this, "E-Mail or Password field empty.",
                             Toast.LENGTH_LONG).show();
                     Log.d(tag, "E-Mails or Passwords empty. No creation attempt made");
+                    if(id != null){
+                        userProfiles.child(id).removeValue();
+                    }
                 }
-
             }
         });
 
@@ -120,11 +125,10 @@ public class New_Account_Activity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
-                                // If sign in fails, display a message to the user.
-                                // immediately closes after log/toast??
                                 Log.w(tag, "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(New_Account_Activity.this, "Authentication Failed, Try Again.",
                                         Toast.LENGTH_LONG).show();
+
                             }
                         }
                     });

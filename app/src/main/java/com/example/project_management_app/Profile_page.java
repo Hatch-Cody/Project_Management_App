@@ -1,4 +1,5 @@
 package com.example.project_management_app;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
 
-
+/**
+ * Displays profile, allows editing of profile info.
+ */
 public class Profile_page extends AppCompatActivity {
     Dialog myDialog;
     private TextView name1, name2, position, email, phoneNum, bio;
@@ -47,7 +50,6 @@ public class Profile_page extends AppCompatActivity {
         }
     }
 
-
     public void CreatePopup(View v){
         TextView close;
         Button createUser;
@@ -59,13 +61,11 @@ public class Profile_page extends AppCompatActivity {
         bioField = (EditText) findViewById(R.id.bio_field);
         posField = (EditText) findViewById(R.id.position_field);
 
-
         createUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String temp;
 
-                //////////////////////////////////test these more...
                 if(phoneField != null) {
                     temp = phoneField.getText().toString().trim();
                     if (!temp.equals("")) {
@@ -87,7 +87,6 @@ public class Profile_page extends AppCompatActivity {
                     }
                 }
 
-
                 Toast.makeText(Profile_page.this, "Profile Changes Saved.",
                         Toast.LENGTH_SHORT).show();
 
@@ -108,8 +107,6 @@ public class Profile_page extends AppCompatActivity {
         });
         myDialog.show();
     }
-
-
 
     @Override
     public void onBackPressed(){

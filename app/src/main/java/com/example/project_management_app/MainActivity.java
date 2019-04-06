@@ -197,13 +197,11 @@ public class MainActivity extends AppCompatActivity
 
         final String tag = "Menu";
         Log.d(tag, "Creating new menu...");
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
         userProfilesRef = FirebaseDatabase.getInstance().getReference("userProfiles");
         final Handler handler = new Handler();
 
-        //Queries the database for user
         Log.d(tag, "->" + email + "<-| being queried...");
         query = userProfilesRef.orderByChild("userName").equalTo(email);
         userProfilesRef = query.getRef();
@@ -239,9 +237,10 @@ public class MainActivity extends AppCompatActivity
 
         TextView email_drawer_header = (TextView) findViewById(R.id.email_drawer_header);
         TextView userName_drawer_header = (TextView) findViewById(R.id.userName_drawer_header);
-        ImageView profile_pic_header; ////////////////////////////Will pass profile pic when set up
+        ImageView profile_pic_header; //Will pass profile pic when bitmaps set up
 
-        BackgroundMenuThread menuSet = new BackgroundMenuThread(email_drawer_header, userName_drawer_header, handler, MainActivity.this, userProfile);
+        BackgroundMenuThread menuSet = new BackgroundMenuThread(email_drawer_header,
+                userName_drawer_header, handler, MainActivity.this, userProfile);
         menuSet.run();
 
         //checks if menu updated before tick, and if so, resets the menu once more

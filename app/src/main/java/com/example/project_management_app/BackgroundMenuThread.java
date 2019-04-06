@@ -11,10 +11,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-/****
- * BACKGROUND MENU THREAD:
- *
- * Will take users profile and updates menu with user specific values
+/**
+ * Attaches user profile info to the main menu.
  */
 public class BackgroundMenuThread extends Thread {
     private TextView email_textView,  user_textView;
@@ -23,6 +21,14 @@ public class BackgroundMenuThread extends Thread {
     private Context context;        //in case we want to add context functionality
     private Profile userProfile;
 
+    /**
+     * Constructor.
+     * @param email_textView refers to email field on menu header.
+     * @param user_textView refers to user name field on menu header.
+     * @param h handler
+     * @param c context (Main.this)
+     * @param profile user's profile from main
+     */
     BackgroundMenuThread(TextView email_textView, TextView user_textView, Handler h, Context c, Profile profile){
         handler = h;
         this.user_textView = user_textView;
@@ -31,10 +37,8 @@ public class BackgroundMenuThread extends Thread {
         context = c;
     }
 
-
     @Override
     public void run(){
-
         final String tag = "Background Menu Thread";
         Log.d(tag, "Starting Background Menu Thread...");
 
@@ -49,8 +53,5 @@ public class BackgroundMenuThread extends Thread {
                 Log.d(tag, "Header set, Terminating Thread.");
             }
         });
-
-
     }
-
 }
