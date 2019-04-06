@@ -19,13 +19,13 @@
     <string name="active">Active</string>
     <string name="title_activity_tasks_new_task">tasks_newTask</string>
     <string name="name">Name:</string>
-    <string name="taskName">Task Name:</string>
-    <string name="taskDescription">Task Description:</string>
-    <string name="taskPriority">Task Priority:</string>
-    <string name="taskProgress">Task Progress:</string>
-    <string name="taskDueDate">Task Due Date:</string>
-    <string name="taskAssignedTo">Task Assign To:</string>
-    <string name="taskAssignDate">Task Assigned Date:</string>
+    <string name="taskName">Name: </string>
+    <string name="taskDescription">Description: </string>
+    <string name="taskPriority">Priority: </string>
+    <string name="taskProgress">Progress: </string>
+    <string name="taskDueDate">Due Date: </string>
+    <string name="taskAssignedTo">Assigned To: </string>
+    <string name="taskAssignDate">Assigned Date: </string>
 
     <string-array name="priority_numbers">
         <item>1</item>
