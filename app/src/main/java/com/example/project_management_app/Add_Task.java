@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +33,10 @@ public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItem
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference reference;
+
+    private int year = 0;
+    private int month = 0;
+    private int days = 0;
 
     //create instance of firebasefirestore to enable task addition
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -84,12 +90,22 @@ public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItem
                 String taskDueDate = newTaskDueDate.getText().toString();
                 String taskDescription = newTaskDescription.getText().toString();
 
-                String currentDate = Calendar.getInstance().getTime().toString();
-
-                if (!currentDate.equals(taskAssignDate)) {
-                    Toast.makeText(Add_Task.this, "Not a valid date, please re-enter date",
-                            Toast.LENGTH_LONG).show();
-                } else {
+//                Calendar currentDate = Calendar.getInstance();
+//                year = currentDate.get(Calendar.YEAR);
+//                month = currentDate.get(Calendar.MONTH);
+//                days = currentDate.get(Calendar.DAY_OF_MONTH);
+//
+//
+//                String Date = DateFormat.getDateInstance().format(taskAssignDate);
+//                String DueDate = DateFormat.getDateInstance().format(taskDueDate);
+//
+//
+//                if (year == ) {
+//                    Toast.makeText(Add_Task.this, "Not a valid date, please re-enter date",
+//                            Toast.LENGTH_LONG).show();
+//                }else if (){
+//
+//                } else {
 
                     Map<String, Object> task = new HashMap<>();
                     task.put("taskName", taskName);
@@ -119,7 +135,7 @@ public class Add_Task extends AppCompatActivity /* implements AdapterView.OnItem
                                     Log.d("TAG", "problem adding task to database!");
                                 }
                             });
-                }
+             //   }
             }
         });
     }
