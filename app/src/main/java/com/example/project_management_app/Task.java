@@ -6,7 +6,7 @@ package com.example.project_management_app;
 public class Task {
     private String  TaskName;
     private String  priority;
-    private String  assignTo;
+    private String  assignedTo;
     private String  description;
     private String  dueDate;
     private String  assignDate;
@@ -28,11 +28,11 @@ public class Task {
      * @param assignDate Date the task was assigned.
      * @param taskId Unique ID of each task.
      */
-    public Task(String taskName, String priority, Boolean isComplete, String assignTo, String description, String dueDate, String assignDate, String taskId) {
+    public Task(String taskName, String priority, Boolean isComplete, String assignedTo, String description, String dueDate, String assignDate, String taskId) {
         TaskName =         taskName;
         this.priority =    priority;
         this.isComplete =  isComplete;
-        this.assignTo =    assignTo;
+        this.assignedTo =    assignedTo;
         this.description = description;
         this.dueDate =     dueDate;
         this.assignDate =  assignDate;
@@ -90,11 +90,11 @@ public class Task {
         this.assignDate = assignDate;
     }
 
-    public String getAssignTo() {
-        return assignTo;
+    public String getAssignedTo() {
+        return assignedTo;
     }
-    public void   setAssignTo(String assignTo) {
-        this.assignTo = assignTo;
+    public void   setAssignedTo(String assignedTo) {
+        this.assignedTo = assignedTo;
     }
 
     /*
