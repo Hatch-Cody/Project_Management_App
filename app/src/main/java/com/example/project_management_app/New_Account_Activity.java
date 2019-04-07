@@ -30,12 +30,12 @@ public class New_Account_Activity extends AppCompatActivity {
         FirebaseApp.initializeApp(New_Account_Activity.this);
         mAuth = FirebaseAuth.getInstance();
 
-        email = (EditText) findViewById(R.id.email_field1);
-        cEmail = (EditText) findViewById(R.id.email_field2);
-        password = (EditText) findViewById(R.id.password_field1);
-        cPassword = (EditText) findViewById(R.id.password_field2);
-        create = (Button) findViewById(R.id.create_Btn);
-        exit = (Button) findViewById(R.id.exit_Btn_account_creation);
+        email     = findViewById(R.id.email_field1);
+        cEmail    = findViewById(R.id.email_field2);
+        password  = findViewById(R.id.password_field1);
+        cPassword = findViewById(R.id.password_field2);
+        create    = findViewById(R.id.create_Btn);
+        exit      = findViewById(R.id.exit_Btn_account_creation);
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,6 @@ public class New_Account_Activity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                     Log.d(tag, "E-Mails or Passwords empty. No creation attempt made");
                 }
-
             }
         });
 
@@ -73,10 +72,7 @@ public class New_Account_Activity extends AppCompatActivity {
         });
     }
 
-
-
         private void createAccount(String fEmail, String fPassword){
-
             Log.d(tag, "Beginning account creation...");
 
             mAuth.createUserWithEmailAndPassword(fEmail, fPassword)
@@ -84,23 +80,19 @@ public class New_Account_Activity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                //if task succeeds, logs in immediately and skips this block??
+                                //if task succeeds, logs in immediately and skips this block
                                 Log.d(tag, "createUserWithEmail:success");
                                 Toast.makeText(New_Account_Activity.this, "Account created, Please login.",
                                         Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
                                 // If sign in fails, display a message to the user.
-                                // immediately closes after log/toast??
+                                // immediately closes after log/toast
                                 Log.w(tag, "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(New_Account_Activity.this, "Authentication Failed, Try Again.",
                                         Toast.LENGTH_LONG).show();
                             }
                         }
                     });
-
         }
-
-
-
 }

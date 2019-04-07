@@ -11,18 +11,18 @@ public class Profile {
     private static String lastName;
     private String userName;
     private String password;
-    private Boolean isActive;
-    private Boolean isManager;
     private String EmployeeId;
     private String bio;
     private String phoneNumber;
     private String email;
     private String position;
-    private Queue<Integer> hours;
     private Boolean isLoggedIn;
+    private Boolean isActive;
+    private Boolean isManager;
     private double userId;
     private Vector<Task> t;
     private Bitmap profilePic;
+    private Queue<Integer> hours;
 
     /**
      * Default constructor for the profile class shows that no user was logged in.
@@ -47,17 +47,6 @@ public class Profile {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    /*
-    public Boolean isManager() {
-
-        return isManager;
-    }
-
-    public void setManager(Boolean manager) {
-        isManager = manager;
-    }
-    */
 
     public String getUserName() {
         return userName;
@@ -117,16 +106,6 @@ public class Profile {
         this.position = position;
     }
 
-    /*
-    public Queue<Integer> getHours() {
-        return hours;
-    }
-
-    public void setHours(Queue<Integer> hours) {
-        this.hours = hours;
-    }
-    */
-
     public Boolean isLoggedIn() {
         return isLoggedIn;
     }
@@ -162,4 +141,23 @@ public class Profile {
     public void sendTask(View v){
 
     }
+
+    /*
+    public Boolean isManager() {
+
+        return isManager;
+    }
+
+    public void setManager(Boolean manager) {
+        isManager = manager;
+    }
+
+    public Queue<Integer> getHours() {
+        return hours;
+    }
+
+    public void setHours(Queue<Integer> hours) {
+        this.hours = hours;
+    }
+    */
 }

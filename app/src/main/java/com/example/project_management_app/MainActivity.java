@@ -1,13 +1,10 @@
 package com.example.project_management_app;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,7 +16,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,31 +34,37 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-
+/**
+ * Main activity for the Project Manager app.
+ * Creates a recyclerView.
+ * Creates a List of tasks.
+ * Creates a menu and floating action button
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private String tag = "MainActivity";
     private Profile userProfile = new Profile();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    //private FirebaseStorage storage = FirebaseStorage.getInstance();
     private DatabaseReference mDataBase = FirebaseDatabase.getInstance().getReference();
-    private String tag = "MAIN_ACTIVITY";
-    // instance of firestore
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    Dialog myDialog;
     private RecyclerView recyclerView;
     private List<Task> tasksList;
     TaskAdapter taskAdapter;
+
+    // Declare instance of database
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,46 +72,49 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        */
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //////////////////////////////////////LOGIN/////////////////////////////////////////////////
+        // User login information
         FirebaseApp.initializeApp(MainActivity.this);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                ////////////////////////////////////////////////////////////CALLING TWICE?????
-                Log.d(tag, "AUHTSTATE CHANGED");
+                Log.d(tag, "AUTHSTATE CHANGED");
                 if(firebaseAuth.getCurrentUser() == null){
                     Log.d(tag, "User Not logged in, starting: LOGIN_ACTIVITY");
                     startActivity(new Intent(MainActivity.this, Login_Activity.class));
                 }else{
                     userProfile.setEmail("");
                     userProfile.setUserName("Logged in User");
-                    Log.d(tag, "User Profile Loaded to App...");
+                    Log.d(tag, "User Profile Loaded to App");
 
                     invalidateOptionsMenu();
-                    Log.d(tag, "Menu Invalidated.");
+                    Log.d(tag, "Menu Invalidated");
 
                 }
             }
         };
 
-        tasksList = new ArrayList<>();
+        tasksList   = new ArrayList<>();
         taskAdapter = new TaskAdapter(tasksList);
+
         db = FirebaseFirestore.getInstance();
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(taskAdapter);
+
         db.collection("Tasks").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -166,9 +171,9 @@ public class MainActivity extends AppCompatActivity
 
         final Handler handler = new Handler();
 
-        TextView email_drawer_header = (TextView) findViewById(R.id.email_drawer_header);
-        TextView userName_drawer_header = (TextView) findViewById(R.id.userName_drawer_header);
-        ImageView profile_pic_header; ////////////////////////////Will pass profile pic when set up
+        TextView email_drawer_header    = findViewById(R.id.email_drawer_header);
+        TextView userName_drawer_header = findViewById(R.id.userName_drawer_header);
+        // ImageView profile_pic_header; // Will pass profile pic when set up
 
         BackgroundMenuThread menuSet = new BackgroundMenuThread(email_drawer_header, userName_drawer_header, handler, MainActivity.this, userProfile);
         menuSet.run();
@@ -176,11 +181,15 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Handle action bar item clicks
+     * Action bar automatically handles clicks on the Home/Up button if
+     * a parent activity is specified in AndroidManifest.xml.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -224,21 +233,10 @@ public class MainActivity extends AppCompatActivity
             signOut();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-/*
-    public void upLoadTasks(View view){
-        Task t = new Task("Clean Room", 5, Boolean.FALSE,
-                0, "", "", "Tuesday",
-                "Friday", "123");
-
-
-        mDataBase.child("Tasks").child(t.getTaskId()).setValue(t);
-    }
-    */
-
 
     @Override
     public void onDestroy(){
@@ -248,12 +246,12 @@ public class MainActivity extends AppCompatActivity
 
     public void signOut(){
         FirebaseAuth.getInstance().signOut();
-        Toast.makeText(MainActivity.this, "User Logged Out", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_LONG).show();
         Log.d("SIGN OUT()", "User Signed Out.");
     }
 
+    // Floating Action Button link to create a new task
+    public void newTask(View v) {
+        startActivity(new Intent(MainActivity.this, Add_Task.class));
+    }
 }
-
-
-
-

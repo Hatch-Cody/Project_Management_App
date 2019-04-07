@@ -100,7 +100,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/white" />
         </LinearLayout>
-
     </LinearLayout>
 
     <TextView
@@ -122,4 +121,3 @@
         android:textStyle="bold"
         android:textColor="@color/white"/>
 </LinearLayout>
-
