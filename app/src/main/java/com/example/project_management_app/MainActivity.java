@@ -102,9 +102,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
-        // TESTING FOR TOP PRIORITY TASKS TO DISPLAY ON THE HOME SCREEN NEEDS TO BE CLEANED ONCE
-        // EVERYTHING ELSE IS DONE
-        displayPriorityTaks();
+
         tasksList = new ArrayList<>();
         taskAdapter = new TaskAdapter(tasksList);
         db = FirebaseFirestore.getInstance();
@@ -140,12 +138,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-    }
-    //END OF TESTING
-
-    protected void displayPriorityTaks(){
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
