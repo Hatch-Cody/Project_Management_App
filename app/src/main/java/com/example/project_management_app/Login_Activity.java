@@ -16,19 +16,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * Handles login event, and starts account creation.
- */
 public class Login_Activity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private EditText email;
     private EditText password;
-    final String tag = "LOGIN_ACTIVITY";
+    final   String tag = "LOGIN_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +45,9 @@ public class Login_Activity extends AppCompatActivity {
             }
         };
 
-        Button login_Btn = (Button) findViewById(R.id.login_Btn);
-        password = (EditText) findViewById(R.id.password_field);
-        email = (EditText) findViewById(R.id.email_field);
+        Button login_Btn = findViewById(R.id.login_Btn);
+        password         = findViewById(R.id.password_field);
+        email            = findViewById(R.id.email_field);
 
         login_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +58,12 @@ public class Login_Activity extends AppCompatActivity {
         });
 
         Button new_user = (Button) findViewById(R.id.new_user);
+
         new_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
                 Log.d(tag, "Create Account clicked...");
-                startActivityForResult(new Intent(Login_Activity.this, New_Account_Activity.class), 2);
+                startActivity(new Intent(Login_Activity.this, New_Account_Activity.class));
             }
         });
     }
@@ -78,15 +74,15 @@ public class Login_Activity extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-    private void signIn() {
+        private void signIn() {
             String pswrd = password.getText().toString();
             String mail = email.getText().toString();
-            generateResult();
 
             if (TextUtils.isEmpty(mail) || TextUtils.isEmpty(pswrd)) {
                 Toast.makeText(Login_Activity.this, "Login Field(s) Empty", Toast.LENGTH_LONG).show();
                 Log.d(tag, "Login Field(s) Empty, No Attempt Made...");
             } else {
+
                 mAuth.signInWithEmailAndPassword(mail, pswrd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -99,19 +95,4 @@ public class Login_Activity extends AppCompatActivity {
                 });
             }
         }
-
-    private void generateResult(){
-        Intent i = new Intent();
-        i.putExtra("email", email.getText().toString().trim());
-        setResult(RESULT_OK, i);
-        Log.d(tag, "Result generated");
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent i){
-        if(requestCode == 2 && resultCode == RESULT_OK){
-            String rEmail = i.getStringExtra("email").trim();
-            email.setText(rEmail);
-        }
-    }
 }

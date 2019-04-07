@@ -11,34 +11,36 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * The TaskAdapter class reformats the tasks from the database and reads them
+ * The TaskAdapter class reformats tasks from the database then reads them
  * into the recyclerView
  */
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
-    private static final String TAG = "DatabaseDownload";
+    private static final String TAG = "TaskAdapter";
 
-    public List<Task> tasksList;
+    private List<Task> tasksList;
 
     public TaskAdapter(List<Task> tasksList) {
+        Log.d(TAG, "Adding tasksList to List");
+
         this.tasksList = tasksList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Log.d(TAG, "Inside onCreateViewHolder of TaskAdapter");
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.taskview, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+
         viewHolder.newTaskName.setText(tasksList.get(i).getTaskName());
-        viewHolder.newTaskPriority.setText(viewHolder.newTaskPriority.getText()+" "+tasksList.get(i).getPriority());
-        viewHolder.newTaskAssignedTo.setText(viewHolder.newTaskAssignedTo.getText()+" "+tasksList.get(i).getAssignedTo());
-        viewHolder.newTaskAssignDate.setText(viewHolder.newTaskAssignDate.getText()+" "+tasksList.get(i).getAssignDate());
-        viewHolder.newTaskDescription.setText(viewHolder.newTaskDescription.getText()+" "+tasksList.get(i).getDescription());
-        viewHolder.newTaskDueDate.setText(viewHolder.newTaskDueDate.getText()+" "+tasksList.get(i).getDueDate());
+        viewHolder.newTaskPriority.setText(tasksList.get(i).getPriority());
+        viewHolder.newTaskAssignTo.setText(tasksList.get(i).getAssignTo());
+        viewHolder.newTaskAssignDate.setText(tasksList.get(i).getAssignDate());
+        viewHolder.newTaskDescription.setText(tasksList.get(i).getDescription());
+        viewHolder.newTaskDueDate.setText(tasksList.get(i).getDueDate());
     }
 
     @Override
@@ -47,22 +49,23 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         View mView;
 
-        public TextView newTaskName,
-                        newTaskPriority,
-                        newTaskAssignedTo,
-                        newTaskAssignDate,
-                        newTaskDescription,
-                        newTaskDueDate;
+        private TextView newTaskName,
+                newTaskPriority,
+                newTaskAssignTo,
+                newTaskAssignDate,
+                newTaskDescription,
+                newTaskDueDate;
 
-        public ViewHolder(@NonNull View itemView) {
+        private ViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
 
             newTaskName        = mView.findViewById(R.id.taskName);
             newTaskPriority    = mView.findViewById(R.id.taskPriority);
-            newTaskAssignedTo  = mView.findViewById(R.id.taskAssignedTo);
+            newTaskAssignTo    = mView.findViewById(R.id.taskAssignTo);
             newTaskAssignDate  = mView.findViewById(R.id.taskAssignDate);
             newTaskDescription = mView.findViewById(R.id.taskDescription);
             newTaskDueDate     = mView.findViewById(R.id.taskDueDate);

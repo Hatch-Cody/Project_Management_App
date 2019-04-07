@@ -1,6 +1,5 @@
 package com.example.project_management_app;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,17 +22,16 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 /**
- * This class creates new tasks from a popup window and then adds them to the database
+ * This class creates new tasks by getting task attributes and adding them to the database
  */
 public class tasks_newTask extends AppCompatActivity {
     private static final String TAG = "AppDatabaseInformation";
 
-    Dialog myDialog;
     private RecyclerView recyclerView;
     private List<Task> tasksList;
     TaskAdapter taskAdapter;
 
-    // database references
+    // References to the Database
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference reference;
     FirebaseFirestore db;
@@ -43,56 +41,44 @@ public class tasks_newTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks_viewer);
 
-        Log.d(TAG, "Inside onCreate of tasks_newTask");
-
-        tasksList = new ArrayList<>();
+        tasksList  = new ArrayList<>();
         taskAdapter = new TaskAdapter(tasksList);
 
         // Prepare recyclerView to be populated
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(taskAdapter);
 
         db = FirebaseFirestore.getInstance();
 
-        // Go through database and populate the recycler view with data
+        // Go through database and populate the recyclerView with Tasks
         db.collection("Tasks").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
                 // Check if there is a problem
                 if (e != null) {
-
                     Log.d(TAG, "Error: " + e.getMessage());
                 }
 
-                // Loop through database Tasks document
+                // Loop through Tasks document of the database
                 for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
-                    Log.d(TAG, "Inside for loop of onEvent");
-
                     if (doc.getType() == DocumentChange.Type.ADDED) {
-                                Log.d(TAG, "Inside if statement of onEvent in tasks_newTask");
-
                         // Store task to be displayed to the recycler view
                         Task task = doc.getDocument().toObject(Task.class);
 
-                                Log.d(TAG, "Inside if statement of onEvent in tasks_newTask after task assign");
-
-                        // add task to taskList to be displayed in the recycler view
+                        // Add task to taskList to be displayed in the recycler view
                         tasksList.add(task);
-
-                                Log.d(TAG, "Inside if statement of onEvent in tasks_newTask ofter tasksList.add(task)");
-
                         taskAdapter.notifyDataSetChanged();
 
-                                Log.d(TAG, "Reading into recyclerView");
+                                Log.d(TAG, "Reading task into recyclerView");
                     }
                 }
             }
         });
     }
 
-        // FAB link to create a new task
+        // Floating Action Button link to create a new task
         public void newTask(View v) {
                 startActivity(new Intent(tasks_newTask.this, Add_Task.class));
         }
