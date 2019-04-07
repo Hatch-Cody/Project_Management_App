@@ -48,6 +48,7 @@ public class tasks_newTask extends AppCompatActivity {
         tasksList = new ArrayList<>();
         taskAdapter = new TaskAdapter(tasksList);
 
+        // Prepare recyclerView to be populated
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -55,25 +56,29 @@ public class tasks_newTask extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
+        // Go through database and populate the recycler view with data
         db.collection("Tasks").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-
+                // Check if there is a problem
                 if (e != null) {
 
                     Log.d(TAG, "Error: " + e.getMessage());
                 }
 
+                // Loop through database Tasks document
                 for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
                     Log.d(TAG, "Inside for loop of onEvent");
 
                     if (doc.getType() == DocumentChange.Type.ADDED) {
                                 Log.d(TAG, "Inside if statement of onEvent in tasks_newTask");
 
+                        // Store task to be displayed to the recycler view
                         Task task = doc.getDocument().toObject(Task.class);
 
                                 Log.d(TAG, "Inside if statement of onEvent in tasks_newTask after task assign");
 
+                        // add task to taskList to be displayed in the recycler view
                         tasksList.add(task);
 
                                 Log.d(TAG, "Inside if statement of onEvent in tasks_newTask ofter tasksList.add(task)");
