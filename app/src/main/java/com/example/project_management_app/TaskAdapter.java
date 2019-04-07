@@ -37,7 +37,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         viewHolder.newTaskName.setText(tasksList.get(i).getTaskName());
         viewHolder.newTaskPriority.setText(tasksList.get(i).getPriority());
-        viewHolder.newTaskAssignTo.setText(tasksList.get(i).getAssignTo());
+        viewHolder.newTaskAssignedTo.setText(tasksList.get(i).getAssignedTo());
         viewHolder.newTaskAssignDate.setText(tasksList.get(i).getAssignDate());
         viewHolder.newTaskDescription.setText(tasksList.get(i).getDescription());
         viewHolder.newTaskDueDate.setText(tasksList.get(i).getDueDate());
@@ -54,7 +54,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         private TextView newTaskName,
                 newTaskPriority,
-                newTaskAssignTo,
+                newTaskAssignedTo,
                 newTaskAssignDate,
                 newTaskDescription,
                 newTaskDueDate;
@@ -65,7 +65,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
             newTaskName        = mView.findViewById(R.id.taskName);
             newTaskPriority    = mView.findViewById(R.id.taskPriority);
-            newTaskAssignTo    = mView.findViewById(R.id.taskAssignTo);
+            newTaskAssignedTo    = mView.findViewById(R.id.taskAssignedTo);
             newTaskAssignDate  = mView.findViewById(R.id.taskAssignDate);
             newTaskDescription = mView.findViewById(R.id.taskDescription);
             newTaskDueDate     = mView.findViewById(R.id.taskDueDate);
